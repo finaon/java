@@ -50,13 +50,12 @@ public class PlayerService {
 		return p;
 	}
 	
-	public Player selectByPlayerAge(String playerAge) {
+	public ArrayList<Player> selectByPlayerAge(int age) {
 		Connection conn = JDBCTemplate.getConnection();
-		Player p = new PlayerDao().selectByPlayerName(conn, playerAge);
+		ArrayList<Player> list = new PlayerDao().selectByPlayerAge(conn, age);
 		JDBCTemplate.close(conn);
 		
-		return p;
+		return list;
 	}
-	
 	
 }	

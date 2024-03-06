@@ -1,6 +1,6 @@
+
 package jdbc_hw1.view;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,7 +22,8 @@ public class PlayerMenu {
 			System.out.println("2. 선수 전체 조회");
 			System.out.println("3. 선수 지역 변경");
 			System.out.println("4. 선수 이름으로 검색");
-//			System.out.println("5. 프로선수 여부");
+			System.out.println("5. 나이로 선수 조회(중복가능)");
+			System.out.println("6. 선수나이로 선수 분류(18세) ");
 			System.out.println("0. 프로그램 종료\n");
 			
 			System.out.print("메뉴 번호 입력 : ");
@@ -43,8 +44,12 @@ public class PlayerMenu {
 			case 4 :
 				pc.selectByPlayerName(inputPlayerName());
 				break;
-//			case 5 :
-//				pc.selectByPlayerAge(intputPlayerName());
+			case 5 :
+				pc.selectByPlayerAge(inputPlayerAge());
+				break;
+			case 6 :
+				pc.selectByPlayerName1(inputPlayerName());
+				break;
 			case 0 :	
 				System.out.println("프로그램을 종료합니다");
 				return;
@@ -66,7 +71,8 @@ public class PlayerMenu {
 			String footPosition = sc.nextLine();
 			
 			System.out.print("선수 나이 :");
-			String age = sc.nextLine();
+			int age = sc.nextInt();
+			sc.nextLine();
 			
 			System.out.print("선수 키 :");
 			String height = sc.nextLine();
@@ -83,7 +89,7 @@ public class PlayerMenu {
 		public void updatePlayer() {
 			System.out.println("===========선수 정보 변경========");
 			
-			String playerName = this.inputPlayerName();
+			String playerName = this.inputPlayerName(); // 출력메소드
 			
 			System.out.print("변경할 활동지역 : ");
 			String location = sc.nextLine();
@@ -91,13 +97,22 @@ public class PlayerMenu {
 			pc.updatePlayer(playerName, location);
 			
 		}
+			
 		
 		public String inputPlayerName() {
-			System.out.println("선수 이름 :");
+			System.out.print("선수 이름 :");
 			String playerName = sc.nextLine();
 			return playerName;
 		}
-	
+		
+		public int inputPlayerAge() {
+			System.out.println("선수 나이  : ");
+			int age = sc.nextInt();
+			return age;
+		}
+		
+		
+		
 		//-------------------------------- 응답화면------------------------------------
 		
 		public void displaySuccess(String message) {
@@ -127,11 +142,17 @@ public class PlayerMenu {
 			}
 		}
 		
+		public void displayPlayerAge(ArrayList<Player> agelist) {
+			
+			for(Player p : agelist) {
+				System.out.println(p);
+			}
+		}
+		
 		public void displayPlayer(Player p) {
 			System.out.println("\n조회된 데이터는 다음과 같습니다.");
 			System.out.println(p);
 		}
-
 }
 	
 

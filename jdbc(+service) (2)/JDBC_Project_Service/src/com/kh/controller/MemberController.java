@@ -106,7 +106,4 @@ public class MemberController {
 			new MemberMenu().displayMemberList(list);
 		}
 	}
-	
-	
-	
 }
