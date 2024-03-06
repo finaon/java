@@ -25,7 +25,7 @@ public class PlayerDao {
 			pstmt.setString(1, p.getPlayerName());
 			pstmt.setString(2, p.getPlayerPosition());
 			pstmt.setString(3, p.getFootPosition());
-			pstmt.setInt(4, Integer.parseInt(p.getAge()));
+			pstmt.setInt(4, p.getAge());
 			pstmt.setInt(5, Integer.parseInt(p.getHeight()));
 			pstmt.setInt(6, Integer.parseInt(p.getWeight()));
 			pstmt.setString(7, p.getLocation());
@@ -64,7 +64,7 @@ public class PlayerDao {
 				p.setPlayerName(rset.getString("playername"));
 				p.setPlayerPosition(rset.getString("playerposition"));
 				p.setFootPosition(rset.getString("footposition"));
-				p.setAge(rset.getString("age"));
+				p.setAge(rset.getInt("age"));
 				p.setHeight(rset.getString("height"));
 				p.setWeight(rset.getString("weight"));
 				p.setLocation(rset.getString("location"));
@@ -118,7 +118,7 @@ public class PlayerDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = "SELECT * FROM PLAYER WHERE PLAYERNAME = ?";
+		String sql = "SELECT * FROM PLAYER ORDER BY PLAYERNAME = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -132,7 +132,7 @@ public class PlayerDao {
 				p.setPlayerName(rset.getString("playername"));
 				p.setPlayerPosition(rset.getString("playerposition"));
 				p.setFootPosition(rset.getString("footposition"));
-				p.setAge(rset.getString("age"));
+				p.setAge(rset.getInt("age"));
 				p.setHeight(rset.getString("height"));
 				p.setWeight(rset.getString("weight"));
 				p.setLocation(rset.getString("location"));
@@ -147,14 +147,42 @@ public class PlayerDao {
 		return p;
 	}
 	
-//	public Player selectByPlayerAge(Connection conn, String playerAge) {
-//		
-//		Player p = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		
-//		String sql = "SELECT * FROM PLAYER WHERE PLAYERAGE";
-//		
-//	}
+	public ArrayList<Player> selectByPlayerAge(Connection conn, int age) {
+		
+		ArrayList<Player> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = "SELECT * FROM PLAYER WHERE AGE = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, age);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				Player p  = new Player();
+				p.setPlayerNO(rset.getInt("playerno"));
+				p.setPlayerName(rset.getString("playername"));
+				p.setPlayerPosition(rset.getString("playerposition"));
+				p.setFootPosition(rset.getString("footposition"));
+				p.setAge(rset.getInt("age"));
+				p.setHeight(rset.getString("height"));
+				p.setWeight(rset.getString("weight"));
+				p.setLocation(rset.getString("location"));
+				p.setDebutDate(rset.getDate("debutdate"));
+				
+				list.add(p);
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 	
 }

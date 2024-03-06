@@ -8,7 +8,7 @@ import jdbc_hw1.view.PlayerMenu;
 
 public class PlayerController {
 	
-	public void insertPlayer(String playerName, String playerPosition, String footPosition, String age, String height, String weight,
+	public void insertPlayer(String playerName, String playerPosition, String footPosition, int age, String height, String weight,
 			String location) {
 		
 		Player p = new Player(playerName, playerPosition, footPosition, age, height, weight, location);
@@ -50,23 +50,18 @@ public class PlayerController {
 		Player p = new PlayerService().selectByPlayerName(playerName);
 		System.out.println(p);
 		if (p == null) {
-			new PlayerMenu().displayNoData(playerName + "에 해당하는 조회결과가 없습니다.");
+			new PlayerMenu().displayNoData(playerName + "에 해당하는 조회결과가 없습니다. 다시 입력해주세요");
 		} else {
-			new PlayerMenu().displayPlayer(p);
+			new PlayerMenu().displayPlayer(p); // 검색해서 등록된 선수 정보 출력
 		}
 	}
 	
-//	public void selectByPlayerAge(String playerAge) {
-//		Player p = new PlayerService().selectByPlayerAge(playerAge);
-//		System.out.println(p);
-//		if(p >= 17) {
-//			new PlayerMenu().proPlayer(playerAge + "세는 프로 등록이 가능합니다");
-//		} else {
-//			new PlayerMenu().uPlayer(playerAge + "세는 프로 등록이 불가능합니다");
-//		}
-//		
-//		
-//		
-//	}
-
+	public void selectByPlayerAge(int age) {
+		ArrayList<Player> list = new PlayerService().selectByPlayerAge(age);
+		if (list.isEmpty()) {
+			new PlayerMenu().displayNoData(age + "에 해당하는 조회결과가 없습니다. 다시 입력해주세요");
+		} else {
+			new PlayerMenu().displayPlayerList(list); // 검색해서 등록된 특정정보 배열 출력 
+		}
+	}	
 }	

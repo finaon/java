@@ -8,7 +8,7 @@ public class Player {
 	private String playerName;
 	private String playerPosition;
 	private String footPosition;
-	private String age;
+	private int age;
 	private String height;
 	private String weight;
 	private String location;
@@ -22,7 +22,7 @@ public class Player {
 	
 	
 
-	public Player(int playerNO, String playerName, String playerPosition, String footPosition, String age, String height,
+	public Player(int playerNO, String playerName, String playerPosition, String footPosition, int age, String height,
 			String weight, String location, Date debutDate) {
 		super();
 		this.playerNO = playerNO;
@@ -36,7 +36,7 @@ public class Player {
 		this.debutDate = debutDate;
 	}
 	
-	public Player(String playerName, String playerPosition, String footPosition, String age, String height, String weight,
+	public Player(String playerName, String playerPosition, String footPosition, int age, String height, String weight,
 			String location) {
 		super();
 		this.playerName = playerName;
@@ -114,7 +114,7 @@ public class Player {
 
 
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
@@ -122,7 +122,7 @@ public class Player {
 
 
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -192,8 +192,6 @@ public class Player {
 
 
 
-
-
 	@Override
 	public String toString() {
 		return  "[ " + playerName + ", " + playerPosition
@@ -202,6 +200,7 @@ public class Player {
 	}
 
 
+	
 
 
 
