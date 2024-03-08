@@ -64,6 +64,7 @@ public class PlayerController {
 			new PlayerMenu().displayPlayerList(list); // 검색해서 등록된 특정정보 배열 출력 
 		}
 	}	
+
 	
 	public void classifyPlayer(String playerName) {
 		Player p = new PlayerService().selectByPlayerName(playerName);
@@ -89,4 +90,6 @@ public class PlayerController {
 	}
 
 }	
+	
+
 	

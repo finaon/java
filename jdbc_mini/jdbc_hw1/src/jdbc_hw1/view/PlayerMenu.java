@@ -24,8 +24,9 @@ public class PlayerMenu {
 			System.out.println("4. 선수 이름으로 검색");
 			System.out.println("5. 나이로 선수 조회(중복가능)");
 			System.out.println("6. 선수나이로 선수 분류(18세) ");
+			System.out.println("5. 프로선수 여부(이름으로 나이 조회)");
 			System.out.println("0. 프로그램 종료\n");
-			
+
 			System.out.print("메뉴 번호 입력 : ");
 			int select = sc.nextInt();
 			sc.nextLine();
@@ -107,6 +108,7 @@ public class PlayerMenu {
 		
 		public int inputPlayerAge() {
 			System.out.println("선수 나이  : ");
+			System.out.println("선수 나이 조회 : ");
 			int age = sc.nextInt();
 			return age;
 		}

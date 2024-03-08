@@ -117,7 +117,7 @@ public class PlayerDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = "SELECT * FROM PLAYER WHERE PLAYERNAME = ?";
+		String sql = "SELECT * FROM PLAYER ORDER BY PLAYERNAME = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
